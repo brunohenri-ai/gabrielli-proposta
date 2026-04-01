@@ -171,6 +171,25 @@ function initCopyPix() {
   });
 }
 
+/* ── CONTADOR DE VALOR ─────────────────────────────────────── */
+function animateCounter(el, target, duration) {
+  const start     = 0;
+  const startTime = performance.now();
+
+  function update(now) {
+    const elapsed  = now - startTime;
+    const progress = Math.min(elapsed / duration, 1);
+    // easeOutExpo para desacelerar no final
+    const ease     = progress === 1 ? 1 : 1 - Math.pow(2, -10 * progress);
+    const current  = Math.floor(ease * target);
+    // Formata como moeda brasileira
+    el.textContent = 'R$ ' + current.toLocaleString('pt-BR') + ',00';
+    if (progress < 1) requestAnimationFrame(update);
+    else el.textContent = 'R$ 4.000,00'; // garante valor exato
+  }
+  requestAnimationFrame(update);
+}
+
 /* ── SCROLL ANIMATIONS ─────────────────────────────────────── */
 function initReveal() {
   const els = document.querySelectorAll('.reveal');
@@ -178,14 +197,25 @@ function initReveal() {
     els.forEach(el => el.classList.add('visible'));
     return;
   }
+
   const obs = new IntersectionObserver(entries => {
     entries.forEach(e => {
       if (e.isIntersecting) {
         e.target.classList.add('visible');
+
+        // Dispara contador quando a seção de honorários entrar na tela
+        if (e.target.closest('#fees')) {
+          const counter = document.getElementById('feesCounter');
+          if (counter && counter.textContent === 'R$ 0,00') {
+            setTimeout(() => animateCounter(counter, 4000, 1800), 300);
+          }
+        }
+
         obs.unobserve(e.target);
       }
     });
   }, { threshold: 0.1, rootMargin: '0px 0px -32px 0px' });
+
   els.forEach(el => obs.observe(el));
 }
 
