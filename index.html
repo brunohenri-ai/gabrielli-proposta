@@ -18,6 +18,8 @@
 <div class="login-screen" id="loginScreen">
   <div class="login-container">
 
+    <div class="login-line-top"></div>
+
     <div class="login-logo-area">
       <div class="login-logo-text">GABRIELLI <span>PASSOS</span></div>
       <div class="login-logo-sub">Advocacia e Consultoria Especializada</div>
@@ -25,15 +27,22 @@
 
     <div class="login-divider"></div>
 
-    <p class="login-label">Acesso Restrito</p>
+    <p class="login-type">Proposta de Honorários</p>
+    <p class="login-hint">Digite a senha para acessar</p>
 
-    <div class="login-input-wrap">
-      <input type="password" id="pwInput" placeholder="••••••••••••" autocomplete="off" autofocus />
-      <span class="login-eye" id="pwEye">👁</span>
-    </div>
+    <form class="login-form" id="loginForm">
+      <div class="input-group">
+        <input type="password" id="inputPass" placeholder="••••••••••••" autocomplete="current-password" required autofocus />
+      </div>
+      <button type="submit" class="login-btn">
+        <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5">
+          <line x1="5" y1="12" x2="19" y2="12"/>
+          <polyline points="12,5 19,12 12,19"/>
+        </svg>
+      </button>
+      <div class="login-error" id="loginError">Senha incorreta</div>
+    </form>
 
-    <p class="login-error" id="pwError">Senha incorreta</p>
-    <button class="login-btn" id="pwBtn">Acessar</button>
     <p class="login-footer">Documento confidencial</p>
   </div>
 </div>
@@ -44,11 +53,9 @@
 ════════════════════════════════════════════════════════════ -->
 <div class="greet-screen" id="greetScreen">
   <div class="greet-container">
-    <p class="greet-label">Proposta de Honorários</p>
-    <h1 class="greet-name">
-      <span id="twText"></span><span class="tw-cursor" id="twCursor">|</span>
-    </h1>
-    <p class="greet-sub" id="greetSub">Advocacia e Consultoria Especializada</p>
+    <div class="greet-line" id="greetLine"></div>
+    <h1 class="greet-name" id="greetName"></h1>
+    <p class="greet-msg" id="greetMsg"></p>
   </div>
 </div>
 
@@ -61,7 +68,7 @@
   <!-- ── NAVBAR ─────────────────────────────────────────────── -->
   <nav class="navbar" id="navbar">
     <div class="nav-logo">
-      <div class="login-logo-text nav-logo-text">GABRIELLI <span>PASSOS</span></div>
+      <div class="nav-logo-text">GABRIELLI <span>PASSOS</span></div>
     </div>
     <div class="nav-oab">OAB/SP 446.843</div>
   </nav>
@@ -76,8 +83,8 @@
 
     <div class="cover-header">
       <div class="cover-logo">
-        <div class="login-logo-text cover-logo-text">GABRIELLI <span>PASSOS</span></div>
-        <div class="login-logo-sub cover-logo-sub">Advocacia e Consultoria Especializada</div>
+        <div class="cover-logo-text">GABRIELLI <span>PASSOS</span></div>
+        <div class="cover-logo-sub">Advocacia e Consultoria Especializada</div>
       </div>
       <div class="cover-oab">OAB/SP 446.843</div>
     </div>
@@ -469,11 +476,9 @@
           imediato aos trabalhos e garantir o cumprimento integral dos prazos processuais.
         </p>
         <div class="cta-row">
-          <!-- Substitua o número de WhatsApp no script.js -->
           <a href="#" id="btnWhatsApp" class="btn-main" target="_blank" rel="noopener">
             ✓ &nbsp; Estou de Acordo
           </a>
-          <!-- Substitua o e-mail no script.js -->
           <a href="#" id="btnEmail" class="btn-out" target="_blank">
             ✉ &nbsp; Responder por E-mail
           </a>
@@ -496,7 +501,7 @@
       </div>
 
       <div class="closing-logo">
-        <div class="closing-logo-text" id="closingLogoText">Gabrielli Passos</div>
+        <div class="closing-logo-text">Gabrielli Passos</div>
       </div>
 
       <h2 class="closing-name">Gabrielli Passos</h2>
