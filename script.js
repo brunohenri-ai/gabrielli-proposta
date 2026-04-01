@@ -1,6 +1,6 @@
 /* ============================================================
    GABRIELLI PASSOS — PROPOSTA DE HONORÁRIOS
-   script.js — Versão 1.0
+   script.js — Versão 2.0
    ============================================================ */
 
 /* ── CONFIGURAÇÃO ─────────────────────────────────────────── */
@@ -8,254 +8,252 @@
 // Altere a senha aqui
 const PASSWORD = 'gabrielli2026';
 
-// Número de WhatsApp da advogada (somente números, com código do país)
-// Exemplo: 5513999999999 (55 = Brasil, 13 = DDD, xxxxxxxxx = número)
-const WHATSAPP_NUMBER = '5511999999999'; // ← Substitua pelo número real
+// Número de WhatsApp (somente números com DDI+DDD)
+const WHATSAPP = '5513999999999'; // ← Substitua pelo número real
 
-// E-mail da advogada
+// E-mail
 const EMAIL = 'gabrielli@gabriellipassos.adv.br'; // ← Substitua pelo e-mail real
 
-/* ── TELA DE SENHA ─────────────────────────────────────────── */
+/* ── ELEMENTOS ─────────────────────────────────────────────── */
+const loginScreen = document.getElementById('loginScreen');
+const greetScreen = document.getElementById('greetScreen');
+const proposal    = document.getElementById('proposal');
+const pwInput     = document.getElementById('pwInput');
+const pwError     = document.getElementById('pwError');
+const pwBtn       = document.getElementById('pwBtn');
+const pwEye       = document.getElementById('pwEye');
 
-const passwordScreen = document.getElementById('password-screen');
-const proposal       = document.getElementById('proposal');
-const pwInput        = document.getElementById('pw-input');
-const pwError        = document.getElementById('pw-error');
-const pwBtn          = document.getElementById('pw-btn');
-const pwToggle       = document.getElementById('pw-toggle');
+/* ── LOGIN ─────────────────────────────────────────────────── */
+pwBtn.addEventListener('click', tryLogin);
+pwInput.addEventListener('keydown', e => { if (e.key === 'Enter') tryLogin(); });
 
-// Verificar senha ao clicar no botão
-pwBtn.addEventListener('click', checkPassword);
+function tryLogin() {
+  if (pwInput.value.trim() === PASSWORD) {
+    // 1. Fade out tela de login
+    loginScreen.style.transition = 'opacity 0.5s ease';
+    loginScreen.style.opacity = '0';
 
-// Verificar senha ao pressionar Enter
-pwInput.addEventListener('keydown', (e) => {
-  if (e.key === 'Enter') checkPassword();
-});
-
-function checkPassword() {
-  const val = pwInput.value.trim();
-
-  if (val === PASSWORD) {
-    // Senha correta → transição suave
-    passwordScreen.style.transition = 'opacity 0.6s ease';
-    passwordScreen.style.opacity = '0';
     setTimeout(() => {
-      passwordScreen.style.display = 'none';
-      proposal.style.display = 'block';
-      // Trigger scroll animations após mostrar proposta
-      initScrollAnimations();
-      // Scroll ao topo
-      window.scrollTo(0, 0);
-    }, 650);
+      loginScreen.style.display = 'none';
+
+      // 2. Mostrar tela de boas-vindas
+      greetScreen.style.display = 'flex';
+      greetScreen.style.opacity = '0';
+      greetScreen.style.transition = 'opacity 0.5s ease';
+
+      requestAnimationFrame(() => {
+        requestAnimationFrame(() => {
+          greetScreen.style.opacity = '1';
+          // 3. Iniciar typewriter
+          startTypewriter();
+        });
+      });
+    }, 520);
+
   } else {
-    // Senha incorreta → shake + mensagem
-    showError('Senha incorreta. Tente novamente.');
+    // Senha errada
+    pwError.classList.add('show');
+    pwError.classList.remove('shake');
+    void pwError.offsetWidth;
+    pwError.classList.add('shake');
     pwInput.value = '';
     pwInput.focus();
-    triggerShake();
+    setTimeout(() => pwError.classList.remove('show'), 3000);
   }
 }
 
-function showError(msg) {
-  pwError.textContent = msg;
-  pwError.classList.add('visible');
-  setTimeout(() => pwError.classList.remove('visible'), 3500);
-}
-
-function triggerShake() {
-  pwInput.classList.remove('shake');
-  void pwInput.offsetWidth; // reflow para reiniciar animação
-  pwInput.classList.add('shake');
-  setTimeout(() => pwInput.classList.remove('shake'), 500);
-}
-
-// Toggle visibilidade da senha
-pwToggle.addEventListener('click', () => {
+// Toggle show/hide senha
+pwEye.addEventListener('click', () => {
   if (pwInput.type === 'password') {
     pwInput.type = 'text';
-    pwToggle.textContent = '🙈';
+    pwEye.textContent = '🙈';
   } else {
     pwInput.type = 'password';
-    pwToggle.textContent = '👁';
+    pwEye.textContent = '👁';
   }
 });
 
-/* ── ACCORDION — CLÁUSULAS ─────────────────────────────────── */
+/* ── TYPEWRITER ────────────────────────────────────────────── */
+function startTypewriter() {
+  const twText   = document.getElementById('twText');
+  const twCursor = document.getElementById('twCursor');
+  const greetSub = document.getElementById('greetSub');
+  const fullText = 'Olá, Gabrielli Passos';
+  let i = 0;
 
-function initAccordion() {
-  const items = document.querySelectorAll('.acc-item');
+  // Delay antes de começar
+  setTimeout(() => {
+    const interval = setInterval(() => {
+      twText.textContent += fullText[i];
+      i++;
 
-  items.forEach(item => {
-    const header = item.querySelector('.acc-header');
-    header.addEventListener('click', () => {
-      const isOpen = item.classList.contains('open');
+      if (i >= fullText.length) {
+        clearInterval(interval);
 
-      // Fechar todos os outros
-      items.forEach(other => {
-        if (other !== item) {
-          other.classList.remove('open');
-        }
-      });
+        // Subtítulo aparece
+        setTimeout(() => {
+          greetSub.classList.add('show');
+        }, 400);
 
-      // Toggle atual
-      item.classList.toggle('open', !isOpen);
-    });
-  });
+        // Cursor some e proposta abre
+        setTimeout(() => {
+          twCursor.classList.add('off');
 
-  // Abrir o primeiro por padrão
-  if (items.length > 0) {
-    items[0].classList.add('open');
-  }
+          // Fade out greet screen
+          greetScreen.style.transition = 'opacity 0.6s ease';
+          greetScreen.style.opacity = '0';
+
+          setTimeout(() => {
+            greetScreen.style.display = 'none';
+
+            // Mostrar proposta
+            proposal.style.display = 'block';
+            proposal.style.opacity = '0';
+            proposal.style.transition = 'opacity 0.6s ease';
+
+            requestAnimationFrame(() => {
+              requestAnimationFrame(() => {
+                proposal.style.opacity = '1';
+                window.scrollTo(0, 0);
+                initAll();
+              });
+            });
+          }, 650);
+
+        }, 1600);
+      }
+    }, 70); // velocidade de digitação
+  }, 500); // delay inicial
 }
 
-/* ── COPIAR CHAVE PIX ──────────────────────────────────────── */
+/* ── ACCORDION ─────────────────────────────────────────────── */
+function initAccordion() {
+  document.querySelectorAll('.acc-item').forEach((item, idx) => {
+    item.querySelector('.acc-head').addEventListener('click', () => {
+      const isOpen = item.classList.contains('open');
+      document.querySelectorAll('.acc-item').forEach(i => i.classList.remove('open'));
+      if (!isOpen) item.classList.add('open');
+    });
+    // Abre o primeiro por padrão
+    if (idx === 0) item.classList.add('open');
+  });
+}
 
+/* ── COPIAR PIX ────────────────────────────────────────────── */
 function initCopyPix() {
-  const btn = document.getElementById('btn-copy-pix');
+  const btn = document.getElementById('btnCopy');
   if (!btn) return;
-
   btn.addEventListener('click', () => {
-    const pixKey = '386.744.308-48';
-    navigator.clipboard.writeText(pixKey).then(() => {
-      btn.textContent = '✓ Copiado!';
+    const key = '386.744.308-48';
+    navigator.clipboard.writeText(key).then(() => {
+      btn.textContent = '✓  Copiado!';
       btn.classList.add('copied');
       setTimeout(() => {
-        btn.innerHTML = '<span>📋</span> Copiar Chave PIX';
+        btn.textContent = '📋 \u00A0Copiar Chave PIX';
         btn.classList.remove('copied');
       }, 2500);
     }).catch(() => {
-      // Fallback para navegadores sem clipboard API
+      // Fallback
       const ta = document.createElement('textarea');
-      ta.value = pixKey;
-      ta.style.position = 'fixed';
-      ta.style.opacity = '0';
+      ta.value = key;
+      Object.assign(ta.style, { position:'fixed', opacity:'0' });
       document.body.appendChild(ta);
       ta.select();
       document.execCommand('copy');
       document.body.removeChild(ta);
-      btn.textContent = '✓ Copiado!';
+      btn.textContent = '✓  Copiado!';
       btn.classList.add('copied');
       setTimeout(() => {
-        btn.innerHTML = '<span>📋</span> Copiar Chave PIX';
+        btn.textContent = '📋 \u00A0Copiar Chave PIX';
         btn.classList.remove('copied');
       }, 2500);
     });
   });
 }
 
-/* ── SCROLL ANIMATIONS (Intersection Observer) ─────────────── */
-
-function initScrollAnimations() {
-  const reveals = document.querySelectorAll('.reveal');
-
-  if ('IntersectionObserver' in window) {
-    const observer = new IntersectionObserver((entries) => {
-      entries.forEach(entry => {
-        if (entry.isIntersecting) {
-          // Delay escalonado para elementos em grupo
-          const delay = entry.target.dataset.delay || 0;
-          setTimeout(() => {
-            entry.target.classList.add('visible');
-          }, parseInt(delay));
-          observer.unobserve(entry.target);
-        }
-      });
-    }, {
-      threshold: 0.12,
-      rootMargin: '0px 0px -40px 0px'
+/* ── SCROLL ANIMATIONS ─────────────────────────────────────── */
+function initReveal() {
+  const els = document.querySelectorAll('.reveal');
+  if (!('IntersectionObserver' in window)) {
+    els.forEach(el => el.classList.add('visible'));
+    return;
+  }
+  const obs = new IntersectionObserver(entries => {
+    entries.forEach(e => {
+      if (e.isIntersecting) {
+        e.target.classList.add('visible');
+        obs.unobserve(e.target);
+      }
     });
-
-    reveals.forEach(el => observer.observe(el));
-  } else {
-    // Fallback: mostrar tudo imediatamente
-    reveals.forEach(el => el.classList.add('visible'));
-  }
+  }, { threshold: 0.1, rootMargin: '0px 0px -32px 0px' });
+  els.forEach(el => obs.observe(el));
 }
 
-/* ── HEADER FLUTUANTE ──────────────────────────────────────── */
-
-function initStickyHeader() {
-  const header = document.getElementById('sticky-header');
-  if (!header) return;
-
+/* ── NAVBAR FLUTUANTE ──────────────────────────────────────── */
+function initNavbar() {
+  const nav = document.getElementById('navbar');
   window.addEventListener('scroll', () => {
-    if (window.scrollY > 120) {
-      header.classList.add('visible');
-    } else {
-      header.classList.remove('visible');
-    }
+    nav.classList.toggle('show', window.scrollY > 100);
   }, { passive: true });
 }
 
-/* ── BOTÃO VOLTAR AO TOPO ──────────────────────────────────── */
-
-function initBackToTop() {
+/* ── BACK TO TOP ───────────────────────────────────────────── */
+function initBackTop() {
   const btn = document.getElementById('back-top');
-  if (!btn) return;
-
   window.addEventListener('scroll', () => {
-    if (window.scrollY > 500) {
-      btn.classList.add('visible');
-    } else {
-      btn.classList.remove('visible');
-    }
+    btn.classList.toggle('show', window.scrollY > 500);
   }, { passive: true });
-
-  btn.addEventListener('click', () => {
-    window.scrollTo({ top: 0, behavior: 'smooth' });
-  });
+  btn.addEventListener('click', () => window.scrollTo({ top: 0, behavior: 'smooth' }));
 }
 
-/* ── BOTÕES DE CTA ─────────────────────────────────────────── */
-
+/* ── CTA BUTTONS ───────────────────────────────────────────── */
 function initCTA() {
-  const btnWhatsApp = document.getElementById('btn-whatsapp');
-  const btnEmail    = document.getElementById('btn-email');
+  const wa = document.getElementById('btnWhatsApp');
+  const em = document.getElementById('btnEmail');
 
-  if (btnWhatsApp) {
+  if (wa) {
     const msg = encodeURIComponent(
-      'Olá, Gabrielli! De acordo com os termos da proposta de honorários — Processo nº 1010535-44.2024.8.26.0223. Podemos prosseguir.'
+      'Olá, Gabrielli! De acordo com os termos da proposta de honorários referente ao Processo nº 1010535-44.2024.8.26.0223. Podemos prosseguir.'
     );
-    btnWhatsApp.href = `https://wa.me/${WHATSAPP_NUMBER}?text=${msg}`;
+    wa.href = `https://wa.me/${WHATSAPP}?text=${msg}`;
   }
 
-  if (btnEmail) {
-    const subject = encodeURIComponent('DE ACORDO — Proposta de Honorários — Proc. 1010535-44.2024.8.26.0223');
-    const body    = encodeURIComponent(
-      'Olá, Gabrielli,\n\nEstou de acordo com os termos apresentados na proposta de honorários.\n\nPodemos prosseguir.\n\nAtenciosamente,'
-    );
-    btnEmail.href = `mailto:${EMAIL}?subject=${subject}&body=${body}`;
+  if (em) {
+    const subj = encodeURIComponent('DE ACORDO — Proposta de Honorários — Proc. 1010535-44.2024.8.26.0223');
+    const body = encodeURIComponent('Olá, Gabrielli,\n\nEstou de acordo com os termos da proposta de honorários.\n\nAtenciosamente,');
+    em.href = `mailto:${EMAIL}?subject=${subj}&body=${body}`;
   }
 }
 
 /* ── LOGO FALLBACK ─────────────────────────────────────────── */
-
-function initLogoFallback() {
-  // Se a imagem do logo falhar, mostrar o monograma elegante
-  const logos = document.querySelectorAll('.logo-img');
-  logos.forEach(img => {
-    img.addEventListener('error', () => {
-      img.style.display = 'none';
-      const fallback = img.nextElementSibling;
-      if (fallback && fallback.classList.contains('logo-fallback')) {
-        fallback.style.display = 'flex';
-      }
-    });
-    // Forçar verificação imediata
-    if (img.complete && img.naturalWidth === 0) {
-      img.dispatchEvent(new Event('error'));
-    }
+function initLogos() {
+  const pairs = [
+    ['loginLogoImg',   'loginLogoFallback'],
+    ['coverLogoImg',   'coverLogoFallback'],
+    ['navLogoImg',     'navLogoText'],
+    ['closingLogoImg', 'closingLogoText'],
+  ];
+  pairs.forEach(([imgId, fbId]) => {
+    const img = document.getElementById(imgId);
+    const fb  = document.getElementById(fbId);
+    if (!img || !fb) return;
+    const show = () => { img.style.display = 'none'; fb.style.display = 'block'; };
+    img.addEventListener('error', show);
+    if (img.complete && img.naturalWidth === 0) show();
   });
 }
 
-/* ── INICIALIZAÇÃO ─────────────────────────────────────────── */
-
-document.addEventListener('DOMContentLoaded', () => {
-  initLogoFallback();
+/* ── INICIALIZAÇÃO APÓS LOGIN ──────────────────────────────── */
+function initAll() {
   initAccordion();
   initCopyPix();
-  initBackToTop();
+  initReveal();
+  initNavbar();
+  initBackTop();
   initCTA();
-  // initStickyHeader e initScrollAnimations são chamados após login
-  // pois o #proposal fica oculto inicialmente
+}
+
+/* ── BOOT ──────────────────────────────────────────────────── */
+document.addEventListener('DOMContentLoaded', () => {
+  initLogos();
 });

@@ -5,151 +5,145 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <meta name="robots" content="noindex, nofollow" />
   <title>Proposta de Honorários — Gabrielli Passos</title>
-
-  <!-- Google Fonts -->
   <link rel="preconnect" href="https://fonts.googleapis.com" />
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-  <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,500;0,600;1,300;1,400;1,500&family=Raleway:wght@300;400;500;600&family=Lato:wght@300;400&display=swap" rel="stylesheet" />
-
-  <!-- Stylesheet -->
+  <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,500;1,300;1,400&family=Raleway:wght@300;400;500;600&family=Lato:wght@300;400&display=swap" rel="stylesheet" />
   <link rel="stylesheet" href="style.css" />
 </head>
 <body>
 
 <!-- ════════════════════════════════════════════════════════════
-     TELA DE SENHA
+     TELA DE LOGIN
 ════════════════════════════════════════════════════════════ -->
-<div id="password-screen">
-  <div class="ps-inner">
+<div class="login-screen" id="loginScreen">
+  <div class="login-container">
 
-    <!-- Logo — Substitua logo.png pelo arquivo do logotipo -->
-    <div class="ps-logo">
-      <img src="logo.png" alt="Gabrielli Passos" class="logo-img" />
-      <!-- Monograma elegante exibido caso o logo não seja encontrado -->
-      <div class="logo-fallback" style="display:none; flex-direction:column; align-items:center; gap:8px;">
-        <div class="ps-monogram">GP</div>
-        <span class="ps-logo-name">Gabrielli Passos</span>
+    <!-- Substitua logo.png pelo arquivo do logotipo -->
+    <div class="login-logo">
+      <img src="logo.png" alt="Gabrielli Passos" id="loginLogoImg" />
+      <div class="login-logo-fallback" id="loginLogoFallback">
+        <span class="mono">Gabrielli Passos</span>
+        <span class="mono" style="font-size:9px; letter-spacing:0.35em; opacity:0.5;">Advocacia e Consultoria</span>
       </div>
     </div>
 
-    <p class="ps-greeting">Olá, Gabrielli Passos</p>
-    <p class="ps-subtitle">Sua proposta personalizada<br>está pronta para acesso</p>
+    <div class="login-line"></div>
+    <p class="login-label">Acesso Restrito</p>
 
-    <div class="ps-divider"></div>
-
-    <p class="ps-access-label">Acesso Restrito</p>
-
-    <div class="ps-field-wrap">
+    <div class="login-input-wrap">
       <input
         type="password"
-        id="pw-input"
+        id="pwInput"
         placeholder="••••••••••••"
         autocomplete="off"
-        aria-label="Senha de acesso"
+        autofocus
       />
-      <span class="ps-eye" id="pw-toggle" title="Mostrar/ocultar senha">👁</span>
+      <span class="login-eye" id="pwEye">👁</span>
     </div>
 
-    <p class="ps-error" id="pw-error" role="alert"></p>
+    <p class="login-error" id="pwError">Senha incorreta</p>
 
-    <button class="ps-btn" id="pw-btn">Acessar Proposta</button>
+    <button class="login-btn" id="pwBtn">Acessar</button>
 
-    <p class="ps-footer">Documento confidencial &nbsp;·&nbsp; Uso exclusivo do destinatário</p>
-
+    <p class="login-footer">Documento confidencial</p>
   </div>
 </div>
 
 
 <!-- ════════════════════════════════════════════════════════════
-     PROPOSTA (oculta até senha correta)
+     TELA DE BOAS-VINDAS (typewriter — aparece após senha)
+════════════════════════════════════════════════════════════ -->
+<div class="greet-screen" id="greetScreen">
+  <div class="greet-container">
+    <p class="greet-label">Proposta de Honorários</p>
+    <h1 class="greet-name">
+      <span id="twText"></span><span class="tw-cursor" id="twCursor">|</span>
+    </h1>
+    <p class="greet-sub" id="greetSub">Advocacia e Consultoria Especializada</p>
+  </div>
+</div>
+
+
+<!-- ════════════════════════════════════════════════════════════
+     PROPOSTA
 ════════════════════════════════════════════════════════════ -->
 <div id="proposal">
 
-  <!-- ── HEADER FLUTUANTE ─────────────────────────────────── -->
-  <header id="sticky-header">
-    <div class="sh-logo">
-      <img src="logo.png" alt="GP" class="logo-img" />
-      <span class="sh-monogram logo-fallback" style="display:none;">GP</span>
+  <!-- ── NAVBAR ─────────────────────────────────────────────── -->
+  <nav class="navbar" id="navbar">
+    <div class="nav-logo">
+      <img src="logo.png" alt="GP" id="navLogoImg" />
+      <span class="nav-logo-text" id="navLogoText" style="display:none;">Gabrielli Passos</span>
     </div>
-    <div class="sh-info">
-      <strong>Gabrielli Passos</strong><br>
-      OAB/SP 446.843
-    </div>
-  </header>
+    <div class="nav-oab">OAB/SP 446.843</div>
+  </nav>
 
-  <!-- ── BOTÃO VOLTAR AO TOPO ─────────────────────────────── -->
-  <button id="back-top" title="Voltar ao topo" aria-label="Voltar ao topo">↑</button>
+  <button id="back-top" title="Voltar ao topo">↑</button>
 
 
   <!-- ════════════════════════════════════════════════════════
-       SEÇÃO 1 — CAPA
+       1. CAPA
   ════════════════════════════════════════════════════════ -->
   <section id="cover">
 
     <div class="cover-header">
       <!-- Logo — Substitua logo.png pelo arquivo do logotipo -->
       <div class="cover-logo">
-        <img src="logo.png" alt="Gabrielli Passos" class="logo-img" />
-        <div class="cover-logo-mono logo-fallback" style="display:none;">
-          <div class="mono-circle">GP</div>
-          <span class="mono-text">Gabrielli Passos</span>
-        </div>
+        <img src="logo.png" alt="Gabrielli Passos" id="coverLogoImg" />
+        <span class="cover-logo-fallback" id="coverLogoFallback">Gabrielli Passos</span>
       </div>
       <div class="cover-oab">OAB/SP 446.843</div>
     </div>
 
     <div class="cover-body">
       <p class="cover-tag">Proposta de Honorários Advocatícios</p>
-
       <h1 class="cover-title">
-        Honorários<br>
-        <span>Contratuais</span>
+        Honorários<br><em>Contratuais</em>
       </h1>
-
-      <div class="cover-client-badge">Hortifruti Guarujá Ltda.</div>
-
-      <p class="cover-process">
-        Processo nº 1010535-44.2024.8.26.0223
-      </p>
-
-      <p class="cover-date">Guarujá &nbsp;·&nbsp; Abril de 2026</p>
-
-      <p class="cover-tagline">
-        "Advocacia estratégica com comprometimento, precisão e resultado."
-      </p>
+      <div class="cover-line"></div>
+      <div class="cover-meta">
+        <div class="cover-meta-item">
+          <div class="cover-meta-label">Processo</div>
+          <div class="cover-meta-value">1010535-44.2024.8.26.0223</div>
+        </div>
+        <div class="cover-meta-item">
+          <div class="cover-meta-label">Cliente</div>
+          <div class="cover-meta-value">Hortifruti Guarujá Ltda.</div>
+        </div>
+        <div class="cover-meta-item">
+          <div class="cover-meta-label">Data</div>
+          <div class="cover-meta-value">Abril de 2026</div>
+        </div>
+      </div>
     </div>
 
-    <div class="cover-footer">
-      <div class="cover-scroll-hint">
-        <div class="scroll-line"></div>
-        <span>Rolar para explorar</span>
-      </div>
+    <div class="cover-footer-hint">
+      <div class="hint-line"></div>
+      <span>Rolar para explorar</span>
     </div>
 
   </section>
 
 
   <!-- ════════════════════════════════════════════════════════
-       SEÇÃO 2 — VISÃO GERAL DO CASO
+       2. VISÃO GERAL
   ════════════════════════════════════════════════════════ -->
-  <section id="overview" class="section">
+  <section class="section" id="overview">
     <div class="container">
 
       <div class="section-header reveal">
-        <span class="gold-label">02 — Visão Geral</span>
-        <span class="gold-divider left"></span>
+        <div class="section-line"></div>
+        <div class="section-label">02 — Visão Geral</div>
         <h2 class="section-title">O Caso em Análise</h2>
-        <p class="section-subtitle">Dados do processo e contexto jurídico</p>
       </div>
 
-      <div class="grid-2">
+      <div class="grid reveal">
 
-        <!-- Card: dados do processo -->
-        <div class="card accent-top reveal" data-delay="100">
+        <div class="grid-cell">
           <table class="process-table">
             <tr>
               <td>Processo</td>
-              <td><span class="gold-val">1010535-44.2024.8.26.0223</span></td>
+              <td class="gold">1010535-44.2024.8.26.0223</td>
             </tr>
             <tr>
               <td>Requerente</td>
@@ -165,30 +159,27 @@
             </tr>
             <tr>
               <td>Instância</td>
-              <td>1ª Instância — Comarca de Guarujá/SP</td>
+              <td>1ª Instância — Guarujá/SP</td>
             </tr>
             <tr>
               <td>Período</td>
-              <td>Contas de 2022 a 2024</td>
+              <td>Contas 2022 a 2024</td>
             </tr>
           </table>
         </div>
 
-        <!-- Card: contexto -->
-        <div class="card card-context reveal" data-delay="200">
-          <p class="card-label">Contexto do Processo</p>
-          <p>
+        <div class="grid-cell alt">
+          <p class="context-label">Contexto</p>
+          <p class="context-text">
             A presente ação monitória foi ajuizada pela concessionária Elektro Redes S.A.
             em face de Hortifruti Guarujá Ltda., visando a cobrança de contas de energia
             elétrica em aberto referentes ao período de 2022 a 2024.
           </p>
-          <br>
-          <p>
+          <p class="context-text">
             O caso exige análise técnica criteriosa, pois parte dos valores cobrados está
             diretamente vinculada a um processo judicial anterior já em andamento — o que
-            abre espaço estratégico relevante para a elaboração de uma defesa fundamentada
-            e eficiente, capaz de contestar a legitimidade de parcela significativa da
-            cobrança.
+            abre espaço estratégico para uma defesa fundamentada e eficiente, capaz de
+            contestar a legitimidade de parcela significativa da cobrança.
           </p>
         </div>
 
@@ -198,69 +189,61 @@
 
 
   <!-- ════════════════════════════════════════════════════════
-       SEÇÃO 3 — DIAGNÓSTICO JURÍDICO
+       3. DIAGNÓSTICO
   ════════════════════════════════════════════════════════ -->
-  <section id="diagnosis" class="section alt-bg">
+  <section class="section alt" id="diagnosis">
     <div class="container">
 
       <div class="section-header reveal">
-        <span class="gold-label">03 — Diagnóstico</span>
-        <span class="gold-divider left"></span>
+        <div class="section-line"></div>
+        <div class="section-label">03 — Diagnóstico</div>
         <h2 class="section-title">Diagnóstico Jurídico Inicial</h2>
-        <p class="section-subtitle">Pontos críticos identificados na análise preliminar do caso</p>
+        <p class="section-sub">Pontos críticos identificados na análise preliminar</p>
       </div>
 
-      <div class="diag-grid">
+      <div class="diag-grid reveal">
 
-        <!-- Card 1 -->
-        <div class="diag-card reveal" data-delay="0">
-          <div class="diag-icon">⚖️</div>
+        <div class="diag-cell">
+          <div class="diag-num">01</div>
           <h3>Conexão com Processo Anterior</h3>
           <p>
-            Parte das cobranças desta ação está vinculada ao Processo nº
-            <strong>1008965-28.2021.8.26.0223</strong>, no qual já foi obtido êxito
-            judicial para que os valores fossem recalculados corretamente. A Elektro
-            persiste na cobrança com base em cálculo expressamente contestado e
-            reconhecido como equivocado em sede judicial.
+            Parte das cobranças está vinculada ao Processo nº
+            <strong>1008965-28.2021.8.26.0223</strong>, no qual já foi obtido
+            êxito judicial para recálculo correto dos valores. A Elektro persiste
+            na cobrança com base em cálculo reconhecidamente equivocado.
           </p>
         </div>
 
-        <!-- Card 2 -->
-        <div class="diag-card reveal" data-delay="120">
-          <div class="diag-icon">⚠️</div>
+        <div class="diag-cell">
+          <div class="diag-num">02</div>
           <h3>Litigância de Má-Fé</h3>
           <p>
-            Diante do histórico processual documentado, há fundamento sólido para
-            requerer a aplicação de multa por <strong>litigância de má-fé</strong>
-            por parte da concessionária, que insiste em cobrar valores já contestados
-            e com erro reconhecido em instância judicial. A conduta da Elektro
-            configura abuso do direito de demandar.
+            Há fundamento sólido para requerer a aplicação de multa por
+            <strong>litigância de má-fé</strong> da concessionária, que insiste
+            em cobrar valores já contestados e com erro reconhecido em instância
+            judicial. Conduta que configura abuso do direito de demandar.
           </p>
         </div>
 
-        <!-- Card 3 -->
-        <div class="diag-card reveal" data-delay="240">
-          <div class="diag-icon">🤝</div>
+        <div class="diag-cell">
+          <div class="diag-num">03</div>
           <h3>Estratégia de Parcelamento</h3>
           <p>
             Para as demais contas sem vinculação ao processo anterior, a estratégia
-            prioritária será a negociação de um <strong>parcelamento mais amplo</strong>.
-            É importante esclarecer que a concessionária não está legalmente obrigada
-            a aceitar condições estendidas, razão pela qual a condução negocial deverá
-            ser hábil e tecnicamente fundamentada.
+            prioritária será a negociação de <strong>parcelamento mais amplo</strong>.
+            A concessionária não está legalmente obrigada a aceitar condições
+            estendidas — a condução negocial deverá ser tecnicamente fundamentada.
           </p>
         </div>
 
       </div>
 
-      <!-- Alerta de prazo -->
-      <div class="diag-alert reveal" data-delay="300">
-        <span class="alert-icon">⏱</span>
+      <div class="diag-alert reveal">
+        <span>⏱</span>
         <p>
-          <strong>Prazo processual crítico:</strong> O prazo legal para apresentação
-          da defesa é de <strong>15 dias</strong>. O início imediato da análise
-          documental é imprescindível para garantir a integridade do prazo e a
-          qualidade técnica da peça defensiva.
+          <strong>Prazo processual crítico:</strong> 15 dias para apresentação da
+          defesa. O início imediato da análise documental é imprescindível para
+          garantir a qualidade técnica da peça defensiva.
         </p>
       </div>
 
@@ -269,82 +252,57 @@
 
 
   <!-- ════════════════════════════════════════════════════════
-       SEÇÃO 4 — ESTRATÉGIA
+       4. ESTRATÉGIA
   ════════════════════════════════════════════════════════ -->
-  <section id="strategy" class="section">
+  <section class="section" id="strategy">
     <div class="container">
 
       <div class="section-header reveal">
-        <span class="gold-label">04 — Estratégia</span>
-        <span class="gold-divider left"></span>
+        <div class="section-line"></div>
+        <div class="section-label">04 — Estratégia</div>
         <h2 class="section-title">Plano de Atuação</h2>
-        <p class="section-subtitle">Etapas estratégicas desenvolvidas para este caso específico</p>
+        <p class="section-sub">Etapas desenvolvidas para este caso específico</p>
       </div>
 
-      <div class="steps">
+      <div class="steps reveal">
 
-        <div class="step-item reveal" data-delay="0">
-          <div class="step-num-col">
-            <div class="step-num">1</div>
-            <div class="step-line"></div>
-          </div>
-          <div class="step-body">
+        <div class="step-row">
+          <div class="step-num-cell"><span class="step-num">1</span></div>
+          <div class="step-content">
             <h3>Análise Técnica da Cobrança</h3>
-            <p>Revisão minuciosa de todos os documentos, faturas e do histórico completo
-            do processo anterior vinculado, identificando com precisão os valores legítimos
-            e os valores passíveis de contestação.</p>
+            <p>Revisão minuciosa de todos os documentos, faturas e histórico completo do processo anterior, identificando com precisão os valores legítimos e os passíveis de contestação.</p>
           </div>
         </div>
 
-        <div class="step-item reveal" data-delay="80">
-          <div class="step-num-col">
-            <div class="step-num">2</div>
-            <div class="step-line"></div>
-          </div>
-          <div class="step-body">
+        <div class="step-row">
+          <div class="step-num-cell"><span class="step-num">2</span></div>
+          <div class="step-content">
             <h3>Elaboração da Defesa</h3>
-            <p>Peça técnica fundamentada com arguição da conexão processual, impugnação
-            formal dos valores indevidos e apresentação das teses jurídicas cabíveis
-            dentro do prazo legal de 15 dias.</p>
+            <p>Peça técnica fundamentada com arguição da conexão processual, impugnação formal dos valores indevidos e apresentação das teses jurídicas cabíveis dentro do prazo de 15 dias.</p>
           </div>
         </div>
 
-        <div class="step-item reveal" data-delay="160">
-          <div class="step-num-col">
-            <div class="step-num">3</div>
-            <div class="step-line"></div>
-          </div>
-          <div class="step-body">
-            <h3>Pedido de Multa por Litigância de Má-Fé</h3>
-            <p>Requerimento formal e fundamentado de aplicação de sanção processual à
-            concessionária, com base na conduta abusiva de cobrar valores já reconhecidos
-            como equivocados por decisão judicial anterior.</p>
+        <div class="step-row">
+          <div class="step-num-cell"><span class="step-num">3</span></div>
+          <div class="step-content">
+            <h3>Pedido de Multa por Má-Fé</h3>
+            <p>Requerimento formal de aplicação de sanção processual à concessionária, com base na conduta abusiva de cobrar valores já reconhecidos como equivocados por decisão judicial anterior.</p>
           </div>
         </div>
 
-        <div class="step-item reveal" data-delay="240">
-          <div class="step-num-col">
-            <div class="step-num">4</div>
-            <div class="step-line"></div>
-          </div>
-          <div class="step-body">
+        <div class="step-row">
+          <div class="step-num-cell"><span class="step-num">4</span></div>
+          <div class="step-content">
             <h3>Negociação e Parcelamento</h3>
-            <p>Tratativas estratégicas junto à Elektro para equacionar os valores das
-            demais contas com condições de parcelamento viáveis ao cliente, buscando a
-            resolução mais favorável possível dentro das limitações legais.</p>
+            <p>Tratativas estratégicas para equacionar os valores das demais contas com condições de parcelamento viáveis, buscando a resolução mais favorável possível dentro das limitações legais.</p>
           </div>
         </div>
 
-        <div class="step-item reveal" data-delay="320">
-          <div class="step-num-col">
-            <div class="step-num">5</div>
-            <div class="step-line"></div>
-          </div>
-          <div class="step-body">
+        <div class="step-row">
+          <div class="step-num-cell"><span class="step-num">5</span></div>
+          <div class="step-content">
             <h3>Condução Processual Estratégica</h3>
-            <p>Acompanhamento integral do feito em primeira instância, com observância
-            rigorosa de todos os prazos processuais, manifestações oportunas e comunicação
-            clara e contínua com o cliente sobre os andamentos do processo.</p>
+            <p>Acompanhamento integral do feito em primeira instância, observância rigorosa dos prazos e comunicação clara e contínua com o cliente sobre os andamentos do processo.</p>
           </div>
         </div>
 
@@ -354,173 +312,152 @@
 
 
   <!-- ════════════════════════════════════════════════════════
-       SEÇÃO 5 — HONORÁRIOS
+       5. HONORÁRIOS
   ════════════════════════════════════════════════════════ -->
-  <section id="fees" class="section">
+  <section class="section" id="fees">
     <div class="container">
 
-      <div class="section-header reveal" style="text-align:center;">
-        <span class="gold-label">05 — Honorários</span>
-        <span class="gold-divider"></span>
+      <div class="section-header reveal">
+        <div class="section-line"></div>
+        <div class="section-label">05 — Honorários</div>
         <h2 class="section-title">Honorários Contratuais</h2>
-        <p class="section-subtitle">Remuneração pelos serviços advocatícios prestados</p>
       </div>
 
-      <div class="fees-main reveal">
+      <div class="fees-block reveal">
 
         <div class="fees-top">
-          <p class="fees-label">Valor Total dos Honorários</p>
-          <div class="fees-value">R$ 4.000,00</div>
-          <p class="fees-written">(quatro mil reais)</p>
-
+          <div class="fees-amount">
+            <p class="fees-amount-label">Valor Total</p>
+            <div class="fees-value">R$ 4.000,00</div>
+            <p class="fees-written">(quatro mil reais)</p>
+          </div>
           <div class="fees-options">
-            <div class="fee-option primary">
-              💳 &nbsp; À Vista — R$ 4.000,00
-            </div>
-            <div class="fee-option secondary">
-              📅 &nbsp; Entrada de 40% (R$ 1.600,00) + saldo a combinar
-            </div>
+            <div class="fee-opt active">À Vista &nbsp;—&nbsp; R$ 4.000,00</div>
+            <div class="fee-opt">Entrada 40% (R$ 1.600,00) + saldo a combinar</div>
           </div>
         </div>
 
         <div class="fees-bottom">
-
-          <div class="pix-section">
-            <h4>Dados para Pagamento — PIX</h4>
-            <div class="pix-card">
-              <p class="pix-name">Gabrielli de Oliveira Passos</p>
-              <p class="pix-key">Chave PIX (CPF): <span>386.744.308-48</span></p>
-              <button class="btn-copy" id="btn-copy-pix">
-                <span>📋</span> Copiar Chave PIX
-              </button>
-            </div>
-          </div>
-
           <div>
-            <p class="pix-note">
-              O pagamento deverá ser realizado mediante transferência PIX na conta
-              indicada. O comprovante de pagamento servirá como recibo formal dos
+            <p class="pix-label">Dados para Pagamento — PIX</p>
+            <p class="pix-name">Gabrielli de Oliveira Passos</p>
+            <p class="pix-key">Chave CPF: <span>386.744.308-48</span></p>
+            <button class="btn-copy" id="btnCopy">📋 &nbsp;Copiar Chave PIX</button>
+          </div>
+          <div>
+            <p class="fees-note">
+              O pagamento deverá ser realizado mediante transferência PIX.
+              O comprovante de pagamento servirá como recibo formal dos
               honorários advocatícios contratados.
             </p>
           </div>
-
         </div>
+
       </div>
     </div>
   </section>
 
 
   <!-- ════════════════════════════════════════════════════════
-       SEÇÃO 6 — CLÁUSULAS GERAIS
+       6. CLÁUSULAS
   ════════════════════════════════════════════════════════ -->
-  <section id="clauses" class="section alt-bg">
+  <section class="section alt" id="clauses">
     <div class="container">
 
       <div class="section-header reveal">
-        <span class="gold-label">06 — Condições</span>
-        <span class="gold-divider left"></span>
+        <div class="section-line"></div>
+        <div class="section-label">06 — Condições</div>
         <h2 class="section-title">Condições Contratuais</h2>
-        <p class="section-subtitle">Termos que regem a presente prestação de serviços advocatícios</p>
+        <p class="section-sub">Termos que regem a presente prestação de serviços advocatícios</p>
       </div>
 
-      <div class="accordion reveal">
+      <div class="acc-list reveal">
 
-        <!-- Cláusula 1 -->
         <div class="acc-item">
-          <div class="acc-header">
+          <div class="acc-head">
             <div class="acc-left">
-              <span class="acc-num">01</span>
-              <span class="acc-title">Vigência dos Honorários</span>
+              <span class="acc-n">01</span>
+              <span class="acc-t">Vigência dos Honorários</span>
             </div>
-            <div class="acc-arrow">▾</div>
+            <div class="acc-icon">+</div>
           </div>
           <div class="acc-body">
             <div class="acc-body-inner">
-              Os honorários são devidos integralmente, independentemente do prazo de
-              duração do processo ou da forma de seu encerramento — incluindo extinção
-              sem resolução do mérito, renúncia, transação ou desistência voluntária.
-              A obrigação de pagamento dos honorários está desvinculada do resultado
-              do processo.
+              Os honorários são devidos integralmente, independentemente do prazo de duração
+              do processo ou da forma de seu encerramento — incluindo extinção sem resolução
+              do mérito, renúncia, transação ou desistência voluntária. A obrigação de
+              pagamento está desvinculada do resultado do processo.
             </div>
           </div>
         </div>
 
-        <!-- Cláusula 2 -->
         <div class="acc-item">
-          <div class="acc-header">
+          <div class="acc-head">
             <div class="acc-left">
-              <span class="acc-num">02</span>
-              <span class="acc-title">Escopo dos Serviços</span>
+              <span class="acc-n">02</span>
+              <span class="acc-t">Escopo dos Serviços</span>
             </div>
-            <div class="acc-arrow">▾</div>
+            <div class="acc-icon">+</div>
           </div>
           <div class="acc-body">
             <div class="acc-body-inner">
-              Os honorários ora pactuados compreendem exclusivamente a atuação em
+              Os honorários pactuados compreendem exclusivamente a atuação em
               <strong>defesa de primeira instância</strong>, abrangendo todos os atos
-              processuais pertinentes à fase de conhecimento até a prolação da sentença
-              de primeira instância, incluindo a elaboração da peça de defesa, impugnações
-              e demais manifestações processuais necessárias.
+              processuais pertinentes à fase de conhecimento até a prolação da sentença,
+              incluindo a elaboração da peça de defesa, impugnações e manifestações necessárias.
             </div>
           </div>
         </div>
 
-        <!-- Cláusula 3 -->
         <div class="acc-item">
-          <div class="acc-header">
+          <div class="acc-head">
             <div class="acc-left">
-              <span class="acc-num">03</span>
-              <span class="acc-title">Recursos e Fases Futuras</span>
+              <span class="acc-n">03</span>
+              <span class="acc-t">Recursos e Fases Futuras</span>
             </div>
-            <div class="acc-arrow">▾</div>
+            <div class="acc-icon">+</div>
           </div>
           <div class="acc-body">
             <div class="acc-body-inner">
-              A eventual interposição de recursos — incluindo agravo de instrumento,
-              recurso ordinário, recurso especial, recurso extraordinário — bem como
-              contrarrazões e a fase de cumprimento de sentença, constituirão objeto de
-              nova e autônoma negociação, com honorários específicos a serem acordados
-              entre as partes quando da necessidade de cada ato.
+              A interposição de recursos — agravo de instrumento, recurso especial,
+              recurso extraordinário — bem como contrarrazões e cumprimento de sentença,
+              constituirão objeto de nova negociação autônoma, com honorários específicos
+              a serem acordados quando da necessidade de cada ato.
             </div>
           </div>
         </div>
 
-        <!-- Cláusula 4 -->
         <div class="acc-item">
-          <div class="acc-header">
+          <div class="acc-head">
             <div class="acc-left">
-              <span class="acc-num">04</span>
-              <span class="acc-title">Despesas Processuais</span>
+              <span class="acc-n">04</span>
+              <span class="acc-t">Despesas Processuais</span>
             </div>
-            <div class="acc-arrow">▾</div>
+            <div class="acc-icon">+</div>
           </div>
           <div class="acc-body">
             <div class="acc-body-inner">
-              As custas e demais despesas judiciais (distribuição, citação, perícias,
-              diligências, entre outras) são de exclusiva responsabilidade do cliente
-              e serão adiantadas mediante solicitação prévia da advogada, acompanhada
-              da devida justificativa e estimativa de valores. Tais valores não estão
-              incluídos nos honorários contratuais pactuados.
+              As custas e despesas judiciais são de responsabilidade do cliente e serão
+              adiantadas mediante solicitação prévia da advogada, acompanhada da devida
+              justificativa e estimativa de valores. Não estão incluídas nos honorários
+              contratuais pactuados.
             </div>
           </div>
         </div>
 
-        <!-- Cláusula 5 -->
         <div class="acc-item">
-          <div class="acc-header">
+          <div class="acc-head">
             <div class="acc-left">
-              <span class="acc-num">05</span>
-              <span class="acc-title">Honorários Sucumbenciais</span>
+              <span class="acc-n">05</span>
+              <span class="acc-t">Honorários Sucumbenciais</span>
             </div>
-            <div class="acc-arrow">▾</div>
+            <div class="acc-icon">+</div>
           </div>
           <div class="acc-body">
             <div class="acc-body-inner">
-              Eventuais honorários sucumbenciais fixados pelo juízo em favor da parte
-              vencedora, nos termos do art. 85 do Código de Processo Civil, pertencem
-              ao cliente. O advogado não terá direito autônomo a tais honorários, que
-              integrarão o patrimônio do cliente, salvo disposição diversa
-              expressamente pactuada entre as partes.
+              Eventuais honorários sucumbenciais fixados pelo juízo, nos termos do art. 85
+              do Código de Processo Civil, pertencem ao cliente. O advogado não terá direito
+              autônomo a tais honorários, salvo disposição diversa expressamente pactuada.
             </div>
           </div>
         </div>
@@ -531,100 +468,69 @@
 
 
   <!-- ════════════════════════════════════════════════════════
-       SEÇÃO 7 — ACEITE
+       7. ACEITE
   ════════════════════════════════════════════════════════ -->
-  <section id="acceptance" class="section">
+  <section class="section" id="acceptance">
     <div class="container">
       <div class="acceptance-inner reveal">
-
-        <span class="gold-label">07 — Aceite</span>
-        <span class="gold-divider"></span>
+        <div class="section-line"></div>
+        <div class="section-label">07 — Aceite</div>
         <h2 class="section-title">Próximos Passos</h2>
-
         <p>
-          Se os termos apresentados nesta proposta estiverem de acordo com suas
-          expectativas, por favor responda com <strong>"DE ACORDO"</strong>
-          para que possamos dar início imediato aos trabalhos e garantir o
-          cumprimento integral dos prazos processuais.
+          Se os termos apresentados estiverem de acordo com suas expectativas,
+          responda com <strong>"DE ACORDO"</strong> para que possamos dar início
+          imediato aos trabalhos e garantir o cumprimento integral dos prazos processuais.
         </p>
-
-        <div class="cta-group">
-          <!-- Substitua o href com o número de WhatsApp real no script.js -->
-          <a
-            href="#"
-            id="btn-whatsapp"
-            class="btn-primary"
-            target="_blank"
-            rel="noopener"
-          >
+        <div class="cta-row">
+          <!-- Substitua o número de WhatsApp no script.js -->
+          <a href="#" id="btnWhatsApp" class="btn-main" target="_blank" rel="noopener">
             ✓ &nbsp; Estou de Acordo
           </a>
-
-          <!-- E-mail — configurado automaticamente pelo script.js -->
-          <a
-            href="#"
-            id="btn-email"
-            class="btn-secondary"
-            target="_blank"
-          >
+          <!-- Substitua o e-mail no script.js -->
+          <a href="#" id="btnEmail" class="btn-out" target="_blank">
             ✉ &nbsp; Responder por E-mail
           </a>
         </div>
-
       </div>
     </div>
   </section>
 
 
   <!-- ════════════════════════════════════════════════════════
-       SEÇÃO 8 — ENCERRAMENTO
+       8. FECHAMENTO
   ════════════════════════════════════════════════════════ -->
   <footer id="closing">
     <div class="container">
 
-      <div class="closing-ornament">
-        <div class="orn-line"></div>
-        <div class="orn-diamond"></div>
-        <div class="orn-line right"></div>
+      <div class="closing-orn">
+        <div class="orn-l"></div>
+        <div class="orn-d"></div>
+        <div class="orn-l"></div>
       </div>
 
-      <!-- Logo de fechamento — Substitua logo.png pelo arquivo do logotipo -->
+      <!-- Logo — Substitua logo.png pelo arquivo do logotipo -->
       <div class="closing-logo">
-        <img src="logo.png" alt="Gabrielli Passos" class="logo-img" />
-        <div class="closing-mono logo-fallback" style="display:none;">G · P</div>
+        <img src="logo.png" alt="Gabrielli Passos" id="closingLogoImg" />
+        <div class="closing-logo-text" id="closingLogoText">Gabrielli Passos</div>
       </div>
 
       <h2 class="closing-name">Gabrielli Passos</h2>
       <span class="closing-oab">OAB/SP 446.843</span>
 
-      <p class="closing-tagline">
-        "Advocacia estratégica com comprometimento, precisão e resultado."
+      <p class="closing-msg">
+        Permaneço inteiramente à disposição para quaisquer esclarecimentos.
+        Será uma honra conduzir este caso com dedicação e eficiência.
       </p>
 
-      <p class="closing-message">
-        Permaneço inteiramente à disposição para quaisquer esclarecimentos
-        que se façam necessários. Será uma honra conduzir este caso com
-        a dedicação, o cuidado e a eficiência que seu negócio merece.
-      </p>
-
-      <div class="closing-ornament" style="margin-bottom: 32px;">
-        <div class="orn-line"></div>
-        <div class="orn-diamond"></div>
-        <div class="orn-line right"></div>
-      </div>
-
-      <p class="closing-footer">
-        © 2026 Gabrielli Passos Advocacia &nbsp;·&nbsp; Todos os direitos reservados
-        &nbsp;·&nbsp; Documento confidencial
+      <p class="closing-copy">
+        © 2026 Gabrielli Passos Advocacia &nbsp;·&nbsp; Documento confidencial
       </p>
 
     </div>
   </footer>
 
-
 </div><!-- /#proposal -->
 
-<!-- Script -->
 <script src="script.js"></script>
 </body>
 </html>
