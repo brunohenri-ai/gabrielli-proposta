@@ -59,7 +59,7 @@ a   { color: inherit; text-decoration: none; }
 }
 
 /* ════════════════════════════════════════════════════════════
-   TELA DE LOGIN
+   TELA DE LOGIN — Estilo Danimars
 ════════════════════════════════════════════════════════════ */
 .login-screen {
   position: fixed; inset: 0; z-index: 9000;
@@ -68,107 +68,165 @@ a   { color: inherit; text-decoration: none; }
   animation: fadeIn 0.6s ease;
 }
 
-/* linha dourada topo */
-.login-screen::before {
-  content: '';
-  position: fixed; top: 0; left: 0;
-  height: 1px; width: 100%;
+.login-container {
+  width: 100%; max-width: 400px;
+  padding: 0 32px;
+  display: flex; flex-direction: column; align-items: center;
+  text-align: center;
+  animation: slideUp 0.7s ease 0.15s both;
+}
+
+/* Linha fina no topo */
+.login-line-top {
+  position: fixed; top: 0; left: 0; right: 0;
+  height: 1px;
   background: linear-gradient(90deg, transparent, var(--gold-lt), var(--gold), var(--gold-lt), transparent);
   animation: barIn 1s ease 0.3s both;
 }
 
-.login-container {
-  width: 100%; max-width: 380px;
-  padding: 0 24px;
-  display: flex; flex-direction: column; align-items: center;
-  text-align: center;
-  animation: slideUp 0.7s ease 0.2s both;
-}
-
-/* ── MARCA TEXTUAL (estilo Danimars) ───────────────────────── */
+/* Logo text */
 .login-logo-area {
   margin-bottom: 28px;
-  text-align: center;
 }
 
 .login-logo-text {
   font-family: var(--font-sans);
-  font-size: 22px;
+  font-size: 24px;
   font-weight: 300;
-  letter-spacing: 0.38em;
+  letter-spacing: 0.5em;
   text-transform: uppercase;
   color: var(--text);
   line-height: 1;
 }
 
-/* Letra/palavra destacada em dourado */
 .login-logo-text span {
   color: var(--gold);
-  font-weight: 500;
 }
 
 .login-logo-sub {
   font-family: var(--font-sans);
-  font-size: 8px;
-  font-weight: 300;
-  letter-spacing: 0.28em;
-  text-transform: uppercase;
+  font-size: 8px; font-weight: 300;
+  letter-spacing: 0.28em; text-transform: uppercase;
   color: var(--text-muted);
   margin-top: 10px;
 }
 
-/* Versão navbar — menor */
-.nav-logo-text {
-  font-size: 13px;
-  letter-spacing: 0.3em;
+/* Divisor */
+.login-divider {
+  width: 100%; height: 1px;
+  background: var(--border);
+  margin-bottom: 24px;
 }
 
-/* Versão capa — fundo escuro */
-.cover-logo-text {
-  color: rgba(248,245,240,0.9);
-}
-.cover-logo-text span { color: var(--gold-lt); }
-
-.cover-logo-sub {
-  color: rgba(212,175,122,0.35);
-}
-
-/* Linha divisória */
-.login-line {
-  width: 40px; height: 1px;
-  background: var(--gold-lt);
-  margin: 0 auto 28px;
-}
-
-/* Label */
-.login-label {
+/* Tipo de documento */
+.login-type {
   font-family: var(--font-sans);
-  font-size: 9px; font-weight: 600;
+  font-size: 10px; font-weight: 600;
   letter-spacing: 0.3em; text-transform: uppercase;
-  color: var(--text-muted);
-  margin-bottom: 20px;
+  color: var(--text-sec);
+  margin-bottom: 6px;
 }
 
-/* Input */
-.login-input-wrap {
-  position: relative; width: 100%; margin-bottom: 6px;
+/* Hint */
+.login-hint {
+  font-family: var(--font-sans);
+  font-size: 11px; font-weight: 300;
+  letter-spacing: 0.05em;
+  color: var(--text-muted);
+  margin-bottom: 28px;
 }
-.login-input-wrap input {
+
+/* Form */
+.login-form {
+  width: 100%;
+  display: flex; flex-direction: column; align-items: center;
+  gap: 0;
+}
+
+/* Input group */
+.input-group {
+  width: 100%; margin-bottom: 16px;
+}
+
+.input-group input {
   width: 100%;
   background: transparent;
   border: none;
   border-bottom: 1px solid var(--border);
-  padding: 12px 36px 12px 0;
+  padding: 14px 0;
   font-family: var(--font-body);
-  font-size: 15px; letter-spacing: 0.25em;
+  font-size: 18px; letter-spacing: 0.3em;
   color: var(--text); text-align: center;
   outline: none;
   transition: border-color var(--tr);
 }
-.login-input-wrap input:focus { border-bottom-color: var(--gold); }
-.login-input-wrap input::placeholder { color: var(--border); letter-spacing: 0.3em; }
+.input-group input:focus { border-bottom-color: var(--gold); }
+.input-group input::placeholder { color: var(--border); }
 
+/* Botão seta — igual Danimars */
+.login-btn {
+  width: 48px; height: 48px;
+  border: 1px solid var(--border);
+  background: transparent;
+  display: flex; align-items: center; justify-content: center;
+  cursor: pointer;
+  color: var(--text-sec);
+  transition: all var(--tr);
+  margin-bottom: 16px;
+}
+.login-btn:hover {
+  background: var(--gold);
+  border-color: var(--gold);
+  color: #fff;
+}
+
+/* Erro */
+.login-error {
+  font-family: var(--font-sans);
+  font-size: 10px; letter-spacing: 0.08em;
+  color: #B05A42;
+  height: 16px;
+  opacity: 0; transition: opacity var(--tr);
+}
+.login-error.show { opacity: 1; }
+.login-error.shake { animation: shake 0.4s ease; }
+
+/* Footer */
+.login-footer {
+  font-family: var(--font-sans);
+  font-size: 9px; letter-spacing: 0.2em; text-transform: uppercase;
+  color: var(--text-muted); opacity: 0.5;
+  margin-top: 20px;
+}
+
+/* Versão navbar */
+.nav-logo-text {
+  font-family: var(--font-sans);
+  font-size: 12px; font-weight: 300;
+  letter-spacing: 0.4em; text-transform: uppercase;
+  color: var(--text);
+}
+.nav-logo-text span { color: var(--gold); }
+
+/* Versão capa (fundo escuro) */
+.cover-logo-text {
+  font-family: var(--font-sans);
+  font-size: 16px; font-weight: 300;
+  letter-spacing: 0.45em; text-transform: uppercase;
+  color: rgba(248,245,240,0.85);
+}
+.cover-logo-text span { color: var(--gold-lt); }
+
+.cover-logo-sub {
+  font-family: var(--font-sans);
+  font-size: 8px; letter-spacing: 0.25em; text-transform: uppercase;
+  color: rgba(212,175,122,0.35);
+  margin-top: 8px;
+}
+
+/* ── PLACEHOLDER (manter compatibilidade) ──────────────────── */
 .login-eye {
+  display: none; /* removido — botão seta substituiu */
   position: absolute; right: 0; top: 50%;
   transform: translateY(-50%);
   cursor: pointer; font-size: 13px;
@@ -240,9 +298,11 @@ a   { color: inherit; text-decoration: none; }
 }
 
 .greet-name {
-  font-family: var(--font-serif);
-  font-size: clamp(36px, 6vw, 64px);
+  font-family: var(--font-sans);
+  font-size: clamp(28px, 5vw, 52px);
   font-weight: 300;
+  letter-spacing: 0.2em;
+  text-transform: uppercase;
   color: #F8F5F0;
   line-height: 1.2;
   min-height: 1.2em;
