@@ -85,24 +85,35 @@ a   { color: inherit; text-decoration: none; }
   animation: slideUp 0.7s ease 0.2s both;
 }
 
-/* Logo */
+/* Logo / Marca Textual */
 .login-logo {
   margin-bottom: 32px;
+  text-align: center;
 }
-.login-logo img {
-  max-width: 160px; max-height: 80px;
-  object-fit: contain; margin: 0 auto;
-  mix-blend-mode: multiply;
-}
-.login-logo-fallback {
-  display: none;
-  flex-direction: column; align-items: center; gap: 6px;
-}
-.login-logo-fallback .mono {
+
+.brand-name {
   font-family: var(--font-serif);
-  font-size: 13px; font-weight: 400;
-  letter-spacing: 0.4em; text-transform: uppercase;
+  font-size: 22px; font-weight: 400;
+  letter-spacing: 0.18em;
   color: var(--gold-dk);
+  line-height: 1.2;
+}
+
+.brand-slogan {
+  font-family: var(--font-sans);
+  font-size: 9px; font-weight: 400;
+  letter-spacing: 0.3em; text-transform: uppercase;
+  color: var(--text-muted);
+  margin-top: 5px;
+}
+
+/* Versão da capa (fundo escuro) */
+.cover-brand-name {
+  font-size: 18px;
+  color: var(--gold-lt);
+}
+.cover-brand-slogan {
+  color: rgba(212,175,122,0.4);
 }
 
 /* Linha divisória */
@@ -801,9 +812,10 @@ a   { color: inherit; text-decoration: none; }
   opacity: 0.8;
 }
 .closing-logo-text {
-  display: none;
+  display: block;
   font-family: var(--font-serif);
-  font-size: 18px; letter-spacing: 0.2em;
+  font-size: 20px; font-weight: 400;
+  letter-spacing: 0.2em;
   color: var(--gold-lt); margin-bottom: 20px;
 }
 
